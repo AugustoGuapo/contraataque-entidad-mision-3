@@ -74,7 +74,7 @@ public class Main {
         double[] classWeights = calcularPesosClase(trainIter, outputNum);
         System.out.println("Pesos de clase: " + Arrays.toString(classWeights));
 
-
+        // Configurar usando las funciones dispuestas para los distintos modelos probados
         MultiLayerConfiguration config = getConfigForFourthModel(channels, classWeights, outputNum, height, width);
         long startTime = System.currentTimeMillis();
         MultiLayerNetwork model = new MultiLayerNetwork(config);
@@ -95,7 +95,7 @@ public class Main {
         ModelSerializer.writeModel(model, modeloGuardado, true);
     }
 
-    /*private static MultiLayerConfiguration getConfigForFirstModel(int channels, double[] classWeights, int outputNum, int height, int width) {
+    private static MultiLayerConfiguration getConfigForFirstModel(int channels, double[] classWeights, int outputNum, int height, int width) {
         return new NeuralNetConfiguration.Builder()
                 .updater(new org.nd4j.linalg.learning.config.Adam(0.001))
                 .list()
@@ -155,7 +155,7 @@ public class Main {
                         .build())
                 .setInputType(InputType.convolutional(height, width, channels)) // importante para calcular tamaños internos
                 .build();
-    }*/
+    }
 
     private static MultiLayerConfiguration getConfigForThirdModel(int channels, double[] classWeights, int outputNum, int height, int width) {
         return new NeuralNetConfiguration.Builder()
@@ -313,7 +313,7 @@ public class Main {
                 totalSamples++;
             }
         }
-        iter.reset(); // ⚠️ ¡Importante!
+        iter.reset();
 
         double[] classWeights = new double[numClases];
         for (int i = 0; i < numClases; i++) {
